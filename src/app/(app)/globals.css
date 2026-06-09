@@ -1,0 +1,197 @@
+@import 'tailwindcss';
+
+/* ── CSS variables ──────────────────────────────────────────── */
+:root {
+  --bg: oklch(0.165 0.006 264);
+  --bg-2: oklch(0.205 0.008 264);
+  --bg-3: oklch(0.245 0.009 264);
+  --line: oklch(0.3 0.011 264);
+  --line-soft: oklch(0.255 0.009 264);
+  --text: oklch(0.96 0.004 264);
+  --muted: oklch(0.7 0.012 264);
+  --faint: oklch(0.55 0.012 264);
+  --accent-h: 286;
+  --accent: oklch(0.74 0.145 var(--accent-h));
+  --accent-2: oklch(0.78 0.13 calc(var(--accent-h) - 76));
+  --accent-soft: oklch(0.74 0.145 var(--accent-h) / 0.14);
+  --accent-grad: linear-gradient(105deg, var(--accent-2), var(--accent));
+  --font-display: var(--font-hanken), system-ui, sans-serif;
+  --font-body: var(--font-hanken), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --maxw: 1180px;
+  --gutter: clamp(20px, 5vw, 72px);
+  --radius: 14px;
+  color-scheme: dark;
+}
+
+/* ── Tailwind theme tokens ──────────────────────────────────── */
+/* @theme (not inline) so Tailwind emits --color-* CSS vars,    */
+/* making text-surface / bg-copy etc. resolve correctly.        */
+@theme {
+  --color-surface: oklch(0.165 0.006 264);
+  --color-surface-2: oklch(0.205 0.008 264);
+  --color-surface-3: oklch(0.245 0.009 264);
+  --color-line: oklch(0.3 0.011 264);
+  --color-line-soft: oklch(0.255 0.009 264);
+  --color-copy: oklch(0.96 0.004 264);
+  --color-muted: oklch(0.7 0.012 264);
+  --color-faint: oklch(0.55 0.012 264);
+  --color-accent: oklch(0.74 0.145 286);
+  --color-accent-2: oklch(0.78 0.13 210);
+  --color-accent-soft: oklch(0.74 0.145 286 / 0.14);
+  --font-display-face: var(--font-hanken), system-ui, sans-serif;
+  --font-mono-face: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+/* ── Base reset — inside @layer base so Tailwind utilities win ── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  /* * {
+    margin: 0;
+  } */
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--text);
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'ss01';
+    overflow-x: hidden;
+  }
+  section {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* ambient glow — fixed pseudo-element can't be done in Tailwind */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      900px 520px at 78% -8%,
+      oklch(0.74 0.145 var(--accent-h) / 0.1),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 440px at 8% 4%,
+      oklch(0.78 0.13 calc(var(--accent-h) - 76) / 0.06),
+      transparent 55%
+    );
+}
+
+/* nav dot pulse */
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(0.74 0.145 var(--accent-h) / 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 6px oklch(0.74 0.145 var(--accent-h) / 0);
+  }
+}
+
+/* ── Shared layout & gradient utilities ─────────────────────── */
+
+/* gradient text clipping must stay in plain CSS */
+.grad {
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* centered max-width wrapper — @utility loses margin-inline:auto */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Scroll-reveal (JS adds .in) ────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+.reveal[data-d='1'] {
+  transition-delay: 0.08s;
+}
+.reveal[data-d='2'] {
+  transition-delay: 0.16s;
+}
+.reveal[data-d='3'] {
+  transition-delay: 0.24s;
+}
+
+/* content: attr() — not expressible in Tailwind */
+.ph::after {
+  content: attr(data-label);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+  background: var(--bg);
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+
+/* ── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
