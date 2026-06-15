@@ -21,7 +21,6 @@ export default function Home() {
       })
     }
 
-    // rAF ensures layout is fully computed before checking positions
     const raf = requestAnimationFrame(revealInView)
 
     const io = new IntersectionObserver(
@@ -40,7 +39,6 @@ export default function Home() {
     window.addEventListener('scroll', revealInView, { passive: true })
     window.addEventListener('load', revealInView)
 
-    // Final fallback — reveal everything after 1s no matter what
     const timer = setTimeout(() => reveals.forEach(revealEl), 1000)
 
     return () => {
@@ -57,13 +55,9 @@ export default function Home() {
       <NavBar />
 
       <main id='top'>
-        {/* ── HERO ── */}
         <Hero />
-        {/* ── WORK ── */}
         <Work />
-        {/* ── ABOUT ── */}
         <About />
-        {/* ── CONTACT ── */}
         <Contact />
       </main>
 

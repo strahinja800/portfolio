@@ -20,7 +20,7 @@ export default function Hero() {
           className='font-display-face text-[clamp(40px,8.2vw,104px)] font-bold leading-[0.98] tracking-[-0.035em] mb-10 reveal'
           data-d='1'
         >
-          Full-stack
+          Frontend web
           <br />
           developer building
           <br />
