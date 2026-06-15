@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Hanken_Grotesk, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
+import { Analytics } from '@vercel/analytics/next'
 
 const hanken = Hanken_Grotesk({
   subsets: ['latin'],
@@ -15,9 +16,13 @@ const jetbrains = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Strahinja Ković — Full-Stack Web Developer',
+  title: 'Strahinja Ković — Frontend Web Developer',
   description:
-    'Strahinja Ković — full-stack web developer building fast, reliable products end to end.',
+    'Strahinja Ković — frontend web developer building fast, reliable products end to end.',
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({
@@ -30,7 +35,10 @@ export default function RootLayout({
       lang='en'
       className={`${hanken.variable} ${jetbrains.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Analytics />
+        {children}
+      </body>
     </html>
   )
 }
