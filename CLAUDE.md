@@ -23,6 +23,7 @@ npm run payload         # Access Payload CLI
 **Stack:** Next.js 16 (App Router) + React 19 + TypeScript 5.7 + Payload CMS 3 + MongoDB + Tailwind CSS v4
 
 ### Directory Structure
+
 ```
 src/
 ├── app/(app)/                  # Public portfolio (routes, pages, components)
@@ -52,6 +53,7 @@ src/
 ## Key Patterns
 
 ### Styling System
+
 - **Framework:** Tailwind CSS v4 with custom theme tokens
 - **Color System:** OKLch colors for perceptual uniformity (defined in `globals.css`)
 - **Design Tokens:** CSS variables (`--bg`, `--accent`, `--text`, `--gutter`, `--maxw`, etc.)
@@ -59,12 +61,14 @@ src/
 - **Responsive:** Uses `clamp()` for fluid spacing/sizing (e.g., `--gutter: clamp(20px, 5vw, 72px)`)
 
 ### Component Structure
+
 - Components live in `src/app/(app)/components/`
 - Main sections exported as defaults (e.g., `export default function Hero() {}`)
 - Use TypeScript for type safety throughout
 - Example: `Hero`, `Work`, `About`, `Contact` sections + `NavBar`, `Footer` shared components
 
 ### Scroll Reveal Animation
+
 - Main page (`page.tsx`) uses IntersectionObserver + RequestAnimationFrame
 - Elements with class `reveal` fade in as they scroll into view
 - Fallback timer ensures animation completes after 1s regardless
@@ -82,24 +86,25 @@ src/
 4. Run `npm run generate:types` to sync TypeScript types
 
 ### Generated Files
+
 - `src/app/(payload)/layout.tsx` — **Do NOT edit** (Payload overwrites it)
 - `src/app/(payload)/api/[...slug]/route.ts` — **Do NOT edit** (auto-generated REST)
 - `src/app/(payload)/api/graphql/route.ts` — **Do NOT edit** (auto-generated GraphQL)
 - `src/app/(payload)/admin/importMap.js` — **Do NOT edit** (auto-generated admin UI map)
 
 ### Collections in This Project
+
 - **Users**: Auth-enabled collection (login for admin panel)
 - **Media**: File uploads with alt text field; publicly readable
 
 ## Environment Setup
 
 `.env` must contain:
+
 ```
 DATABASE_URL=mongodb+srv://username:password@cluster.mongodb.net/db
 PAYLOAD_SECRET=<any-random-string>
 ```
-
-No need for `.env.local` unless overriding; `.env` is git-committed with actual MongoDB Atlas credentials.
 
 ## TypeScript & Build
 
@@ -111,12 +116,14 @@ No need for `.env.local` unless overriding; `.env` is git-committed with actual 
 ## Development Workflow
 
 **Making Changes:**
+
 1. Edit components in `src/app/(app)/components/`
 2. Update styles in globals.css (CSS variables + Tailwind utilities)
 3. For Payload: modify `src/collections/` files and `payload.config.ts`, then `npm run generate:types`
 4. Dev server hot-reloads automatically; use `npm run devsafe` if stuck
 
 **Before Committing:**
+
 - Run `npm run lint` to check code style
 - Run `tsc --noEmit` to verify no type errors
 - Test responsive design and animations in browser
