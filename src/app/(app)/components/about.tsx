@@ -1,6 +1,26 @@
-import { ABOUT_STACKS } from '@/constants/about-stacks'
+'use client'
+
+import { useEffect, useState } from 'react'
+import { STACK_TAG } from '@/constants/work-consts'
 
 export default function About() {
+  const [stacks, setStacks] = useState<{ label: string; items: string[] }[]>([])
+
+  useEffect(() => {
+    fetch('/api/skills?limit=20&sort=createdAt')
+      .then(res => res.json())
+      .then(data => {
+        const docs = data.docs ?? []
+        setStacks(
+          docs.map((doc: any) => ({
+            label: doc.label as string,
+            items: (doc.skill ?? []).map((s: any) => s.label as string),
+          })),
+        )
+      })
+      .catch(err => console.error('Error fetching skills:', err))
+  }, [])
+
   return (
     <section
       className='py-[clamp(80px,13vh,160px)]'
@@ -34,34 +54,22 @@ export default function About() {
               database index to a button&apos;s hover state, and I write code
               other developers actually enjoy inheriting.
             </p>
-            <p className='mt-[22px] text-[17px] leading-[1.65] text-muted'>
-              Most recently I&apos;ve been leading full-stack work on data-heavy
-              SaaS products — owning architecture decisions, mentoring, and
-              shipping features users notice. I&apos;m now looking for a team
-              building something ambitious where I can do my best work.
-            </p>
           </div>
 
           {/* Stacks */}
           <div
-            className='grid gap-7 reveal'
+            className='flex flex-col gap-5 reveal'
             data-d='1'
           >
-            {ABOUT_STACKS.map(group => (
+            {stacks.map(group => (
               <div key={group.label}>
-                <span className='block font-mono-face text-[11.5px] tracking-[0.14em] uppercase text-faint pb-3 mb-3.5 border-b border-line-soft'>
+                <span className='block font-mono-face text-[11px] tracking-[0.14em] uppercase text-accent mb-2.5'>
                   {group.label}
                 </span>
-                <ul className='list-none p-0 flex flex-wrap gap-2'>
-                  {group.items.map((item, i) => (
-                    <li
-                      key={item}
-                      className='font-mono-face text-[12.5px] text-muted'
-                    >
-                      {item}
-                      {i < group.items.length - 1 && (
-                        <span className='ml-2 text-line'>·</span>
-                      )}
+                <ul className='flex flex-wrap gap-2 list-none p-0 m-0'>
+                  {group.items.map((item: string) => (
+                    <li key={item}>
+                      <span className={STACK_TAG}>{item}</span>
                     </li>
                   ))}
                 </ul>

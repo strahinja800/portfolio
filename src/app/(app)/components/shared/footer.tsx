@@ -3,7 +3,7 @@ export default function Footer() {
   return (
     <footer className='border-t border-line-soft py-9'>
       <div className='wrap flex items-center justify-between flex-wrap gap-4 font-mono-face text-[12px] text-faint'>
-        <span>© {year} Strahinja Ković — Full-stack web developer</span>
+        <span>© {year} Strahinja Ković — Frontend web developer</span>
         <span>Built from scratch · TypeScript &amp; care</span>
         <a
           href='#top'
