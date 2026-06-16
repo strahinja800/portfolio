@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload'
 
 export const Skills: CollectionConfig = {
   slug: 'skills',
@@ -15,7 +15,7 @@ export const Skills: CollectionConfig = {
       required: true,
     },
     {
-      name: 'skill',
+      name: 'skills',
       type: 'array',
       fields: [
         {

@@ -207,7 +207,7 @@ export interface Project {
 export interface Skill {
   id: string;
   label: string;
-  skill?:
+  skills?:
     | {
         label: string;
         id?: string | null;
@@ -364,7 +364,7 @@ export interface ProjectsSelect<T extends boolean = true> {
  */
 export interface SkillsSelect<T extends boolean = true> {
   label?: T;
-  skill?:
+  skills?:
     | T
     | {
         label?: T;

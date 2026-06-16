@@ -66,16 +66,13 @@ export default function About() {
                 <span className='block font-mono-face text-[11px] tracking-[0.14em] uppercase text-accent mb-2.5'>
                   {group.label}
                 </span>
-                <div className='flex flex-wrap gap-2'>
+                <ul className='flex flex-wrap gap-2 list-none p-0 m-0'>
                   {group.items.map((item: string) => (
-                    <span
-                      key={item}
-                      className={STACK_TAG}
-                    >
-                      {item}
-                    </span>
+                    <li key={item}>
+                      <span className={STACK_TAG}>{item}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             ))}
           </div>
