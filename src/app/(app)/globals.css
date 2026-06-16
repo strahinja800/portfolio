@@ -18,8 +18,8 @@
   --font-display: var(--font-hanken), system-ui, sans-serif;
   --font-body: var(--font-hanken), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
-  --maxw: 1180px;
-  --gutter: clamp(20px, 5vw, 72px);
+  --maxw: 1320px;
+  --gutter: clamp(16px, 3vw, 40px);
   --radius: 14px;
   color-scheme: dark;
 }

@@ -12,8 +12,14 @@ function serializeRichText(nodes: any): string {
 
   const recurse = (node: any): void => {
     if (!node) return
-    if (typeof node === 'string') { text += node; return }
-    if (node.type === 'text' && node.text) { text += node.text; return }
+    if (typeof node === 'string') {
+      text += node
+      return
+    }
+    if (node.type === 'text' && node.text) {
+      text += node.text
+      return
+    }
     if (node.children && Array.isArray(node.children)) {
       node.children.forEach((child: any) => recurse(child))
     }
@@ -34,10 +40,14 @@ export default function Work() {
   const [projects, setProjects] = useState<any[]>([])
 
   useEffect(() => {
-    fetch('/api/projects')
+    fetch('/api/projects?sort=order')
       .then(res => res.json())
       .then(data => {
-        const projectList = data.docs ? data.docs : Array.isArray(data) ? data : []
+        const projectList = data.docs
+          ? data.docs
+          : Array.isArray(data)
+            ? data
+            : []
         setProjects(projectList)
       })
       .catch(error => console.error('Error fetching projects:', error))
@@ -61,9 +71,16 @@ export default function Work() {
 
         {/* Projects */}
         {projects.map((p, i) => {
-          const desc = typeof p.description === 'string'
-            ? (() => { try { return JSON.parse(p.description) } catch { return p.description } })()
-            : p.description
+          const desc =
+            typeof p.description === 'string'
+              ? (() => {
+                  try {
+                    return JSON.parse(p.description)
+                  } catch {
+                    return p.description
+                  }
+                })()
+              : p.description
           const descText = serializeRichText(desc)
           const techStack = p.technologies?.map((t: any) => t.name) || []
 
@@ -71,10 +88,10 @@ export default function Work() {
             <article
               key={`project-${p.id}`}
               className={[
-                'group/project grid items-center gap-[clamp(28px,5vw,72px)] py-[clamp(48px,7vw,88px)] max-[880px]:grid-cols-1',
+                'group/project grid items-center gap-[clamp(20px,3vw,40px)] py-[clamp(48px,7vw,88px)] max-[880px]:grid-cols-1',
                 i === 0
-                  ? 'grid-cols-[1fr_1.05fr] pt-0 border-t-0'
-                  : 'grid-cols-[1fr_1.05fr] border-t border-line-soft',
+                  ? 'grid-cols-[1fr_1.45fr] pt-0 border-t-0'
+                  : 'grid-cols-[1fr_1.45fr] border-t border-line-soft',
               ].join(' ')}
             >
               {/* Info */}
@@ -85,12 +102,15 @@ export default function Work() {
                 <h3 className='font-display-face text-[clamp(26px,3.4vw,40px)] font-semibold tracking-[-0.02em] leading-[1.05] mb-4'>
                   {p.title}
                 </h3>
-                <p className='text-muted max-w-[46ch] mb-[26px]'>
-                  {descText}
-                </p>
+                <p className='text-muted max-w-[46ch] mb-[26px]'>{descText}</p>
                 <div className='flex flex-wrap gap-2 mb-[30px]'>
                   {techStack.map((t: string) => (
-                    <span key={t} className={STACK_TAG}>{t}</span>
+                    <span
+                      key={t}
+                      className={STACK_TAG}
+                    >
+                      {t}
+                    </span>
                   ))}
                 </div>
                 <Link
@@ -116,7 +136,7 @@ export default function Work() {
                 ].join(' ')}
               >
                 <div
-                  className='ph relative aspect-[4/3] [background:repeating-linear-gradient(135deg,oklch(0.245_0.009_264)_0_12px,oklch(0.225_0.009_264)_12px_24px)] grid place-items-center'
+                  className='ph relative aspect-video [background:repeating-linear-gradient(135deg,oklch(0.245_0.009_264)_0_12px,oklch(0.225_0.009_264)_12px_24px)] grid place-items-center'
                   data-label={p.title}
                 >
                   <div className='absolute inset-x-0 top-0 h-[34px] flex items-center gap-[7px] px-3.5 border-b border-line-soft bg-[oklch(0.20_0.008_264/0.7)] z-10'>
