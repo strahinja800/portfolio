@@ -167,6 +167,27 @@ section {
 
 /* content: attr() — not expressible in Tailwind */
 
+/* ── Skeleton shimmer ───────────────────────────────────────── */
+@keyframes shimmer {
+  0% {
+    background-position: -600px 0;
+  }
+  100% {
+    background-position: 600px 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    oklch(0.205 0.008 264) 0%,
+    oklch(0.255 0.009 264) 40%,
+    oklch(0.205 0.008 264) 80%
+  );
+  background-size: 1200px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: 6px;
+}
+
 /* ── Reduced motion ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html {

@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import { STACK_TAG } from '@/constants/work-consts'
+import AboutSkeleton from './about-skeleton'
 
 export default function About() {
   const [stacks, setStacks] = useState<{ label: string; items: string[] }[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch('/api/skills?limit=20&sort=createdAt')
@@ -17,8 +19,12 @@ export default function About() {
             items: (doc.skills ?? doc.skill ?? []).map((s: any) => s.label as string),
           })),
         )
+        setLoading(false)
       })
-      .catch(err => console.error('Error fetching skills:', err))
+      .catch(err => {
+        console.error('Error fetching skills:', err)
+        setLoading(false)
+      })
   }, [])
 
   return (
@@ -61,20 +67,24 @@ export default function About() {
             className='flex flex-col gap-5 reveal'
             data-d='1'
           >
-            {stacks.map(group => (
-              <div key={group.label}>
-                <span className='block font-mono-face text-[11px] tracking-[0.14em] uppercase text-accent mb-2.5'>
-                  {group.label}
-                </span>
-                <ul className='flex flex-wrap gap-2 list-none p-0 m-0'>
-                  {group.items.map((item: string) => (
-                    <li key={item}>
-                      <span className={STACK_TAG}>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            {loading ? (
+              <AboutSkeleton />
+            ) : (
+              stacks.map(group => (
+                <div key={group.label}>
+                  <span className='block font-mono-face text-[11px] tracking-[0.14em] uppercase text-accent mb-2.5'>
+                    {group.label}
+                  </span>
+                  <ul className='flex flex-wrap gap-2 list-none p-0 m-0'>
+                    {group.items.map((item: string) => (
+                      <li key={item}>
+                        <span className={STACK_TAG}>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
