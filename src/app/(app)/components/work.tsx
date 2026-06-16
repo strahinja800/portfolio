@@ -4,6 +4,7 @@ import { STACK_TAG } from '@/constants/work-consts'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import WorkSkeleton from './work-skeleton'
 
 function serializeRichText(nodes: any): string {
   if (!nodes) return ''
@@ -38,6 +39,7 @@ function serializeRichText(nodes: any): string {
 
 export default function Work() {
   const [projects, setProjects] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch('/api/projects?sort=order')
@@ -49,8 +51,12 @@ export default function Work() {
             ? data
             : []
         setProjects(projectList)
+        setLoading(false)
       })
-      .catch(error => console.error('Error fetching projects:', error))
+      .catch(error => {
+        console.error('Error fetching projects:', error)
+        setLoading(false)
+      })
   }, [])
 
   return (
@@ -70,7 +76,10 @@ export default function Work() {
         </div>
 
         {/* Projects */}
-        {projects.map((p, i) => {
+        {loading ? (
+          <WorkSkeleton />
+        ) : (
+          projects.map((p, i) => {
           const desc =
             typeof p.description === 'string'
               ? (() => {
@@ -156,7 +165,8 @@ export default function Work() {
               </div>
             </article>
           )
-        })}
+        })
+        )}
       </div>
     </section>
   )
