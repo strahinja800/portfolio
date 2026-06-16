@@ -166,17 +166,6 @@ section {
 }
 
 /* content: attr() — not expressible in Tailwind */
-.ph::after {
-  content: attr(data-label);
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  color: var(--faint);
-  background: var(--bg);
-  border: 1px solid var(--line-soft);
-  border-radius: 6px;
-  padding: 6px 12px;
-}
 
 /* ── Reduced motion ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

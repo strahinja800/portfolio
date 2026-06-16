@@ -136,8 +136,7 @@ export default function Work() {
                 ].join(' ')}
               >
                 <div
-                  className='ph relative aspect-video [background:repeating-linear-gradient(135deg,oklch(0.245_0.009_264)_0_12px,oklch(0.225_0.009_264)_12px_24px)] grid place-items-center'
-                  data-label={p.title}
+                  className='ph relative aspect-video [background:repeating-linear-gradient(135deg,oklch(0.245_0.009_264)_0_12px,oklch(0.225_0.009_264)_12px_24px)] overflow-hidden'
                 >
                   <div className='absolute inset-x-0 top-0 h-[34px] flex items-center gap-[7px] px-3.5 border-b border-line-soft bg-[oklch(0.20_0.008_264/0.7)] z-10'>
                     <i className='size-[9px] rounded-full bg-line block not-italic' />

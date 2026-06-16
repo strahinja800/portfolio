@@ -14,7 +14,7 @@ export default function About() {
         setStacks(
           docs.map((doc: any) => ({
             label: doc.label as string,
-            items: (doc.skill ?? []).map((s: any) => s.label as string),
+            items: (doc.skills ?? doc.skill ?? []).map((s: any) => s.label as string),
           })),
         )
       })
