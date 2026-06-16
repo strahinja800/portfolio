@@ -1,7 +1,7 @@
 'use client'
 
 import { META_STRIP } from '@/constants/meta-strip'
-import Link from 'next/link'
+import { scrollToSection } from '@/hooks/use-smooth-scroll'
 
 export default function Hero() {
   return (
@@ -43,24 +43,26 @@ export default function Hero() {
           className='flex text-surface flex-wrap gap-3.5 mt-14 reveal'
           data-d='3'
         >
-          <Link
+          <a
             href='#work'
+            onClick={e => { e.preventDefault(); scrollToSection('work') }}
             className='group inline-flex items-center gap-2.5 font-mono-face text-[13.5px] tracking-[0.02em] px-5.5 py-3.5 rounded-full bg-copy font-semibold transition-transform duration-250 hover:-translate-y-0.5'
           >
             View selected work{' '}
             <span className='transition-transform duration-250 group-hover:translate-x-0.75 group-hover:-translate-y-0.75'>
               ↗
             </span>
-          </Link>
-          <Link
+          </a>
+          <a
             href='#contact'
+            onClick={e => { e.preventDefault(); scrollToSection('contact') }}
             className='group inline-flex items-center gap-2.5 font-mono-face text-[13.5px] tracking-[0.02em] px-5.5 py-3.5 rounded-full border border-line text-copy transition-[transform,background,border-color] duration-250 hover:border-accent hover:bg-accent-soft hover:-translate-y-0.5'
           >
             Get in touch{' '}
             <span className='transition-transform duration-250 group-hover:translate-x-0.75 group-hover:-translate-y-0.75'>
               ↗
             </span>
-          </Link>
+          </a>
         </div>
 
         {/* Meta strip */}

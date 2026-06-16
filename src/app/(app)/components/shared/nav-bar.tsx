@@ -1,5 +1,7 @@
+'use client'
+
 import { LINK_CLASS, useNavBarLinks } from '@/hooks/nav-bar-links'
-import Link from 'next/link'
+import { scrollToSection } from '@/hooks/use-smooth-scroll'
 
 export default function NavBar() {
   const { activeSection, scrolled, menuOpen, setMenuOpen } = useNavBarLinks()
@@ -18,6 +20,7 @@ export default function NavBar() {
         {/* Brand */}
         <a
           href='#top'
+          onClick={e => { e.preventDefault(); scrollToSection('top') }}
           className='font-mono-face text-[14px] tracking-[0.02em] inline-flex items-center gap-[9px] text-copy'
         >
           <span className='size-[7px] rounded-full bg-accent [animation:pulse_2.6s_ease-in-out_infinite]' />
@@ -42,30 +45,34 @@ export default function NavBar() {
           ].join(' ')}
           onClick={() => setMenuOpen(false)}
         >
-          <Link
+          <a
             href='#work'
+            onClick={e => { e.preventDefault(); scrollToSection('work') }}
             className={LINK_CLASS('work', activeSection)}
           >
             <span className='text-faint mr-1.5'>01</span>Work
-          </Link>
-          <Link
+          </a>
+          <a
             href='#about'
+            onClick={e => { e.preventDefault(); scrollToSection('about') }}
             className={LINK_CLASS('about', activeSection)}
           >
             <span className='text-faint mr-1.5'>02</span>About
-          </Link>
-          <Link
+          </a>
+          <a
             href='#contact'
+            onClick={e => { e.preventDefault(); scrollToSection('contact') }}
             className={LINK_CLASS('contact', activeSection)}
           >
             <span className='text-faint mr-1.5'>03</span>Contact
-          </Link>
-          <Link
+          </a>
+          <a
             href='#contact'
+            onClick={e => { e.preventDefault(); scrollToSection('contact') }}
             className='border border-line rounded-full px-[18px] py-[9px] text-copy whitespace-nowrap transition-[border-color,background] duration-[250ms] hover:border-accent hover:bg-accent-soft'
           >
             Available for work
-          </Link>
+          </a>
         </nav>
 
         {/* Mobile toggle */}
