@@ -5,7 +5,7 @@ import { scrollToSection } from '@/hooks/use-smooth-scroll'
 
 export default function Hero() {
   return (
-    <section className='pt-[clamp(150px,22vh,240px)] pb-[clamp(80px,12vh,150px)]'>
+    <section className='pt-[clamp(100px,16vh,180px)] pb-[clamp(60px,10vh,120px)]'>
       <div className='wrap'>
         {/* Status pill */}
         <div className='mb-12 reveal'>
