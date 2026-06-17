@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Hanken_Grotesk, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
@@ -14,6 +14,11 @@ const jetbrains = JetBrains_Mono({
   variable: '--font-jetbrains',
   weight: ['400', '500'],
 })
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://strahinjakovic.dev'),
