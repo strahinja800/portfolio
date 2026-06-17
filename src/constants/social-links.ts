@@ -7,7 +7,7 @@ export const SOCIAL_LINKS = [
   { label: 'GitHub', href: 'https://github.com/strahinja800', external: true },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/strahinja-kovic-47777b219/',
+    href: 'https://linkedin.com/in/strahinjakovic',
     external: true,
   },
   // { label: 'Resume / CV', href: '#', external: false },
