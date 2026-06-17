@@ -22,7 +22,8 @@ export const metadata: Metadata = {
     'Strahinja Ković — frontend web developer building fast, reliable products end to end.',
   openGraph: {
     title: 'Strahinja Ković — Frontend Web Developer',
-    description: 'Strahinja Ković — frontend web developer building fast, reliable products end to end.',
+    description:
+      'Strahinja Ković — frontend web developer building fast, reliable products end to end.',
     url: 'https://strahinjakovic.dev',
     siteName: 'Strahinja Ković',
     locale: 'en_US',
@@ -31,7 +32,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Strahinja Ković — Frontend Web Developer',
-    description: 'Strahinja Ković — frontend web developer building fast, reliable products end to end.',
+    description:
+      'Strahinja Ković — frontend web developer building fast, reliable products end to end.',
   },
   icons: {
     icon: '/favicon.ico',
@@ -45,7 +47,8 @@ const jsonLd = {
   name: 'Strahinja Ković',
   url: 'https://strahinjakovic.dev',
   jobTitle: 'Frontend Web Developer',
-  description: 'Frontend web developer building fast, reliable products end to end.',
+  description:
+    'Frontend web developer building fast, reliable products end to end.',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Belgrade',
@@ -67,7 +70,9 @@ export default function RootLayout({
       <body>
         <script
           type='application/ld+json'
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+          }}
         />
         <Analytics />
         {children}
