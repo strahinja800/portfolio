@@ -20,10 +20,10 @@ export default function Contact() {
         >
           Have a role or project?
           <br />
-          Reach me at{' '}
+          Reach me at <br />
           <Link
             href='mailto:strahinjakovic8@gmail.com'
-            className="grad relative whitespace-nowrap after:content-[''] after:absolute after:left-0 after:bottom-1 after:w-full after:h-0.5 after:[background:var(--accent-grad)] after:origin-left after:scale-x-0 after:transition-transform after:duration-400 hover:after:scale-x-100"
+            className="grad relative break-all after:content-[''] after:absolute after:left-0 after:bottom-1 after:w-full after:h-0.5 after:[background:var(--accent-grad)] after:origin-left after:scale-x-0 after:transition-transform after:duration-400 hover:after:scale-x-100"
           >
             strahinjakovic8@gmail.com
           </Link>
