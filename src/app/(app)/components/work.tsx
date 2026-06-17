@@ -61,7 +61,7 @@ export default function Work() {
 
   return (
     <section
-      className='py-[clamp(80px,13vh,160px)]'
+      className='py-[clamp(60px,10vh,120px)]'
       id='work'
     >
       <div className='wrap'>

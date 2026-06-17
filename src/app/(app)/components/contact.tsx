@@ -4,7 +4,7 @@ import Link from 'next/link'
 export default function Contact() {
   return (
     <section
-      className='py-[clamp(90px,15vh,180px)] border-t border-line-soft'
+      className='py-[clamp(60px,10vh,120px)] border-t border-line-soft'
       id='contact'
     >
       <div className='wrap'>
