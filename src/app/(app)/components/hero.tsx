@@ -2,11 +2,13 @@
 
 import { scrollToSection } from '@/hooks/use-smooth-scroll'
 import { useEffect, useState } from 'react'
+import HeroSkeleton from './hero-skeleton'
 
 type MetaItem = { k: string; v: string }
 
 export default function Hero() {
   const [metaStrip, setMetaStrip] = useState<MetaItem[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch('/api/meta?sort=createdAt&limit=10')
@@ -17,8 +19,9 @@ export default function Hero() {
           v: item.value,
         }))
         setMetaStrip(items)
+        setLoading(false)
       })
-      .catch(() => {})
+      .catch(() => { setLoading(false) })
   }, [])
   return (
     <section className='pt-[clamp(100px,16vh,180px)] pb-[clamp(60px,10vh,120px)]'>
@@ -83,20 +86,23 @@ export default function Hero() {
 
         {/* Meta strip */}
         <div
-          className='mt-24 flex flex-wrap gap-[clamp(28px,5vw,64px)] pt-7 border-t border-line-soft reveal'
+          className='mt-24 pt-7 border-t border-line-soft reveal'
           data-d='3'
         >
-          {metaStrip.map(({ k, v }: MetaItem) => (
-            <div
-              key={k}
-              className='flex flex-col gap-[5px]'
-            >
-              <span className='font-mono-face text-[11.5px] tracking-[0.14em] uppercase text-faint'>
-                {k}
-              </span>
-              <span className='text-[15px] text-copy'>{v}</span>
+          {loading ? (
+            <HeroSkeleton />
+          ) : (
+            <div className='flex flex-wrap gap-[clamp(28px,5vw,64px)]'>
+              {metaStrip.map(({ k, v }: MetaItem) => (
+                <div key={k} className='flex flex-col gap-1.25'>
+                  <span className='font-mono-face text-[11.5px] tracking-[0.14em] uppercase text-faint'>
+                    {k}
+                  </span>
+                  <span className='text-[15px] text-copy'>{v}</span>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>
