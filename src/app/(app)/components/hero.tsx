@@ -1,9 +1,25 @@
 'use client'
 
-import { META_STRIP } from '@/constants/meta-strip'
 import { scrollToSection } from '@/hooks/use-smooth-scroll'
+import { useEffect, useState } from 'react'
+
+type MetaItem = { k: string; v: string }
 
 export default function Hero() {
+  const [metaStrip, setMetaStrip] = useState<MetaItem[]>([])
+
+  useEffect(() => {
+    fetch('/api/meta?sort=createdAt&limit=10')
+      .then(res => res.json())
+      .then(data => {
+        const items: MetaItem[] = (data.docs ?? []).map((item: { key: string; value: string }) => ({
+          k: item.key,
+          v: item.value,
+        }))
+        setMetaStrip(items)
+      })
+      .catch(() => {})
+  }, [])
   return (
     <section className='pt-[clamp(100px,16vh,180px)] pb-[clamp(60px,10vh,120px)]'>
       <div className='wrap'>
@@ -70,7 +86,7 @@ export default function Hero() {
           className='mt-24 flex flex-wrap gap-[clamp(28px,5vw,64px)] pt-7 border-t border-line-soft reveal'
           data-d='3'
         >
-          {META_STRIP.map(({ k, v }) => (
+          {metaStrip.map(({ k, v }: MetaItem) => (
             <div
               key={k}
               className='flex flex-col gap-[5px]'
