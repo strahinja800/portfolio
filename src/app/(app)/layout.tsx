@@ -77,7 +77,7 @@ export default function RootLayout({
         {/* eslint-disable-next-line @next/next/no-before-interactive-script-component */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var t=localStorage.getItem('theme');if(t==='light')document.documentElement.dataset.theme='light'})()`,
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.dataset.theme='light'}catch(e){}})()`,
           }}
         />
         <script
