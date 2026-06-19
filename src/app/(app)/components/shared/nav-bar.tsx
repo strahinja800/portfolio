@@ -2,6 +2,7 @@
 
 import { LINK_CLASS, useNavBarLinks } from '@/hooks/nav-bar-links'
 import { scrollToSection } from '@/hooks/use-smooth-scroll'
+import { ThemeToggle } from './theme-toggle'
 
 export default function NavBar() {
   const { activeSection, scrolled, menuOpen, setMenuOpen } = useNavBarLinks()
@@ -12,7 +13,7 @@ export default function NavBar() {
         'fixed inset-x-0 top-0 z-50 border-b',
         'transition-[background,border-color,backdrop-filter] duration-[400ms]',
         scrolled
-          ? 'bg-[oklch(0.165_0.006_264/0.72)] backdrop-blur-[14px] backdrop-saturate-[140%] border-line-soft'
+          ? 'bg-[var(--nav-scrolled-bg)] backdrop-blur-[14px] backdrop-saturate-[140%] border-line-soft'
           : 'border-transparent',
       ].join(' ')}
     >
@@ -38,7 +39,7 @@ export default function NavBar() {
                   'flex flex-col items-start gap-1',
                   'absolute top-[72px] inset-x-0',
                   'px-[clamp(20px,5vw,72px)] pt-[18px] pb-[26px]',
-                  'bg-[oklch(0.165_0.006_264/0.96)] backdrop-blur-[14px]',
+                  'bg-[var(--nav-menu-bg)] backdrop-blur-[14px]',
                   'border-b border-line-soft',
                 ].join(' ')
               : 'hidden',
@@ -66,6 +67,7 @@ export default function NavBar() {
           >
             <span className='text-faint mr-1.5'>03</span>Contact
           </a>
+          <ThemeToggle />
           <a
             href='#contact'
             onClick={e => { e.preventDefault(); scrollToSection('contact') }}

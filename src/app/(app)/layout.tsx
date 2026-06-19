@@ -71,8 +71,15 @@ export default function RootLayout({
     <html
       lang='en'
       className={`${hanken.variable} ${jetbrains.variable}`}
+      suppressHydrationWarning
     >
       <body>
+        {/* eslint-disable-next-line @next/next/no-before-interactive-script-component */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var t=localStorage.getItem('theme');if(t==='light')document.documentElement.dataset.theme='light'})()`,
+          }}
+        />
         <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{
