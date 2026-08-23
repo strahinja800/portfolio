@@ -198,6 +198,7 @@ export interface Project {
       }[]
     | null;
   liveUrl?: string | null;
+  sourceUrl?: string | null;
   order?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -371,6 +372,7 @@ export interface ProjectsSelect<T extends boolean = true> {
         id?: T;
       };
   liveUrl?: T;
+  sourceUrl?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;
