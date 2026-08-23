@@ -29,7 +29,10 @@ export default function WorkSkeleton() {
                 />
               ))}
             </div>
-            <div className='skeleton h-4 w-20 rounded mt-1' />
+            <div className='flex items-center gap-7 mt-1'>
+              <div className='skeleton h-4 w-20 rounded' />
+              <div className='skeleton h-4 w-32 rounded' />
+            </div>
           </div>
 
           <div className='border border-line-soft rounded-[var(--radius)] overflow-hidden bg-surface-2 max-[880px]:mt-2'>

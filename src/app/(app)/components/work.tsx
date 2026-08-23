@@ -1,6 +1,10 @@
 'use client'
 
-import { STACK_TAG } from '@/constants/work-consts'
+import {
+  PROJECT_LINK,
+  PROJECT_LINK_ARROW,
+  STACK_TAG,
+} from '@/constants/work-consts'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -122,17 +126,29 @@ export default function Work() {
                     </span>
                   ))}
                 </div>
-                <Link
-                  href={p.liveUrl || '#contact'}
-                  target={p.liveUrl ? '_blank' : undefined}
-                  rel={p.liveUrl ? 'noopener noreferrer' : undefined}
-                  className="relative inline-flex items-center gap-[9px] whitespace-nowrap font-mono-face text-[13.5px] text-copy after:content-[''] after:absolute after:left-0 after:bottom-[-3px] after:w-full after:h-px after:bg-accent after:origin-left after:scale-x-0 after:transition-transform after:duration-300 group-hover/project:after:scale-x-100"
-                >
-                  {p.liveUrl ? 'View live' : 'View case study'}{' '}
-                  <span className='transition-transform duration-250 group-hover/project:translate-x-0.75 group-hover/project:-translate-y-0.75'>
-                    ↗
-                  </span>
-                </Link>
+                <div className='flex flex-wrap items-center gap-x-7 gap-y-3'>
+                  {p.liveUrl && (
+                    <Link
+                      href={p.liveUrl}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className={PROJECT_LINK}
+                    >
+                      View live <span className={PROJECT_LINK_ARROW}>↗</span>
+                    </Link>
+                  )}
+                  {p.sourceUrl && (
+                    <Link
+                      href={p.sourceUrl}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className={PROJECT_LINK}
+                    >
+                      View source code{' '}
+                      <span className={PROJECT_LINK_ARROW}>↗</span>
+                    </Link>
+                  )}
+                </div>
               </div>
 
               {/* Media */}

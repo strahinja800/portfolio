@@ -46,6 +46,11 @@ export const Projects: CollectionConfig = {
       type: 'text',
     },
     {
+      name: 'sourceUrl',
+      type: 'text',
+      label: 'Source code URL (GitHub)',
+    },
+    {
       name: 'order',
       type: 'number',
     },
