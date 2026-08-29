@@ -4,61 +4,62 @@ import Link from 'next/link'
 export default function Contact() {
   return (
     <section
-      className='py-[clamp(60px,10vh,120px)] border-t border-line-soft'
+      className='py-[clamp(56px,9vh,110px)] border-t-2 border-line-soft'
       id='contact'
     >
       <div className='wrap'>
         {/* Eyebrow */}
-        <span className='inline-flex items-center gap-2.5 mb-7 font-mono-face text-[12.5px] tracking-[0.16em] uppercase text-faint before:block before:w-[22px] before:h-px before:bg-line reveal'>
-          Let&apos;s talk
+        <span className='inline-flex items-center gap-3.5 mb-7 font-mono-face text-[11.5px] tracking-[0.2em] uppercase text-faint before:block before:w-[34px] before:h-0.5 before:bg-accent reveal'>
+          [ 03 / Contact ] — Let&apos;s talk
         </span>
 
         {/* Heading */}
         <h2
-          className='font-display-face text-[clamp(38px,7vw,92px)] font-bold tracking-[-0.035em] leading-[0.98] mb-9 reveal'
+          className='font-display-face text-[clamp(38px,6.5vw,76px)] leading-[0.9] tracking-[-0.04em] uppercase reveal'
           data-d='1'
         >
-          Have a role or project?
+          Have a role
           <br />
-          Reach me at <br />
-          <Link
-            href='mailto:strahinjakovic8@gmail.com'
-            className="grad relative break-all after:content-[''] after:absolute after:left-0 after:bottom-1 after:w-full after:h-0.5 after:[background:var(--accent-grad)] after:origin-left after:scale-x-0 after:transition-transform after:duration-400 hover:after:scale-x-100"
-          >
-            strahinjakovic8@gmail.com
-          </Link>
+          or project?
         </h2>
 
-        {/* Sub */}
-        <p
-          className='text-muted max-w-[46ch] text-[18px] reveal'
+        {/* Email */}
+        <Link
+          href='mailto:strahinjakovic8@gmail.com'
+          className='inline-block mt-6.5 font-mono-face text-[clamp(17px,3vw,30px)] font-bold tracking-[-0.01em] text-accent break-all border-b-[3px] border-accent pb-2 transition-opacity duration-250 hover:opacity-80 reveal'
+          data-d='1'
+        >
+          strahinjakovic8@gmail.com
+        </Link>
+
+        {/* Sub + socials */}
+        <div
+          className='grid grid-cols-2 gap-[clamp(28px,5vw,56px)] items-end mt-9 max-[880px]:grid-cols-1 max-[880px]:items-start reveal'
           data-d='2'
         >
-          I reply to everything. Whether it&apos;s a full-time opening, a
-          contract, or just a question — I&apos;d love to hear what you&apos;re
-          building.
-        </p>
+          <p className='text-[14px] leading-[1.8] text-muted max-w-[48ch]'>
+            I reply to everything. Whether it&apos;s a full-time opening, a
+            contract, or just a question — I&apos;d love to hear what
+            you&apos;re building.
+          </p>
 
-        {/* Social links */}
-        <div
-          className='mt-[46px] flex flex-wrap gap-3 reveal'
-          data-d='3'
-        >
-          {SOCIAL_LINKS.map(({ label, href, external }) => (
-            <Link
-              key={label}
-              href={href}
-              {...(external
-                ? { target: '_blank', rel: 'noopener noreferrer' }
-                : {})}
-              className='group inline-flex items-center gap-[9px] whitespace-nowrap font-mono-face text-[13px] text-muted border border-line-soft rounded-full px-4.5 py-2.5 bg-surface-2 transition-[color,border-color,transform] duration-250 hover:text-copy hover:border-accent hover:-translate-y-0.5'
-            >
-              {label}{' '}
-              <span className='transition-transform duration-250 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'>
-                ↗
-              </span>
-            </Link>
-          ))}
+          <div className='flex flex-wrap gap-2.5 min-[881px]:justify-end'>
+            {SOCIAL_LINKS.map(({ label, href, external }) => (
+              <Link
+                key={label}
+                href={href}
+                {...(external
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
+                className='group inline-flex items-center gap-2.5 whitespace-nowrap font-mono-face text-[12px] font-bold tracking-[0.08em] uppercase border-2 border-line px-4.5 py-3.25 text-copy transition-colors duration-250 hover:border-accent hover:text-accent'
+              >
+                {label}{' '}
+                <span className='transition-transform duration-250 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'>
+                  ↗
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -30,7 +30,7 @@ export const LINK_CLASS = (section: string, activeSection: string | null) =>
   [
     'relative py-[6px] transition-colors duration-[250ms]',
     "after:content-[''] after:absolute after:left-0 after:bottom-0",
-    'after:h-px after:bg-accent after:origin-left after:transition-[transform] after:duration-300',
+    'after:h-0.5 after:w-full after:bg-accent after:origin-left after:transition-[transform] after:duration-300',
     activeSection === section
       ? 'text-copy after:scale-x-100'
       : 'text-muted hover:text-copy after:scale-x-0 hover:after:scale-x-100',

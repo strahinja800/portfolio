@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from 'next'
-import { Hanken_Grotesk, JetBrains_Mono } from 'next/font/google'
+import { Archivo_Black, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
 
-const hanken = Hanken_Grotesk({
+const archivo = Archivo_Black({
   subsets: ['latin'],
-  variable: '--font-hanken',
-  weight: ['400', '500', '600', '700'],
+  variable: '--font-archivo',
+  weight: ['400'],
 })
 
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-jetbrains',
-  weight: ['400', '500'],
+  weight: ['400', '500', '700'],
 })
 
 export const viewport: Viewport = {
@@ -70,7 +70,7 @@ export default function RootLayout({
   return (
     <html
       lang='en'
-      className={`${hanken.variable} ${jetbrains.variable}`}
+      className={`${archivo.variable} ${jetbrains.variable}`}
       suppressHydrationWarning
     >
       <body>

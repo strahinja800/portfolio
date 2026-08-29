@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import NavBar from './components/shared/nav-bar'
 import Footer from './components/shared/footer'
+import Marquee from './components/shared/marquee'
 import Hero from './components/hero'
 import Work from './components/work'
 import About from './components/about'
@@ -56,6 +57,7 @@ export default function Home() {
 
       <main id='top'>
         <Hero />
+        <Marquee />
         <Work />
         <About />
         <Contact />
