@@ -1,11 +1,26 @@
 export const STACK_TAG =
-  'font-mono-face text-[11.5px] tracking-[0.02em] text-muted border border-line-soft rounded-[6px] px-2.5 py-[5px] bg-surface-2'
+  'font-mono-face text-[11px] lowercase tracking-[0.04em] text-muted border border-line px-2.5 py-[5px]'
 
-export const PROJECT_LINK =
-  "group/link relative inline-flex items-center gap-[9px] whitespace-nowrap font-mono-face text-[13.5px] text-copy after:content-[''] after:absolute after:left-0 after:bottom-[-3px] after:w-full after:h-px after:bg-accent after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"
+const PROJECT_LINK_BASE =
+  'group/link inline-flex items-center gap-[9px] whitespace-nowrap font-mono-face text-[12.5px] font-bold tracking-[0.06em] uppercase pb-[3px] border-b-2 transition-colors duration-250'
+
+export const PROJECT_LINK_PRIMARY = `${PROJECT_LINK_BASE} text-accent border-accent`
+
+export const PROJECT_LINK_SECONDARY = `${PROJECT_LINK_BASE} text-muted border-line hover:text-copy hover:border-accent`
 
 export const PROJECT_LINK_ARROW =
   'transition-transform duration-250 group-hover/link:translate-x-0.75 group-hover/link:-translate-y-0.75'
+
+/* section head — "SELECTED / WORK" style block used by Work and About */
+export const SECTION_TITLE =
+  'font-display-face text-[clamp(30px,5vw,56px)] leading-[0.88] tracking-[-0.035em] uppercase'
+
+export const SECTION_INDEX =
+  'font-mono-face text-[12px] tracking-[0.16em] uppercase text-faint whitespace-nowrap'
+
+/* hatched placeholder behind project screenshots */
+export const PROJECT_FRAME =
+  'border-2 border-line-soft overflow-hidden [background:repeating-linear-gradient(45deg,var(--bg-2)_0_10px,var(--bg)_10px_20px)]'
 
 export const PROJECTS = [
   {

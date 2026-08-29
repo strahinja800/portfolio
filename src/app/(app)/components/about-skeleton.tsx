@@ -6,18 +6,18 @@ const GROUPS = [
 
 export default function AboutSkeleton() {
   return (
-    <div className='flex flex-col gap-5'>
+    <div className='flex flex-col gap-6'>
       {GROUPS.map((group, i) => (
         <div key={i}>
           <div
-            className='skeleton h-[11px] mb-2.5 rounded-full'
+            className='skeleton h-[11px] mb-2.75'
             style={{ width: `${group.labelW}px` }}
           />
-          <div className='flex flex-wrap gap-2'>
+          <div className='flex flex-wrap gap-[7px]'>
             {group.tags.map((w, j) => (
               <div
                 key={j}
-                className='skeleton h-[26px] rounded-full'
+                className='skeleton h-[25px]'
                 style={{ width: `${w}px` }}
               />
             ))}

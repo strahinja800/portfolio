@@ -10,37 +10,40 @@ export default function NavBar() {
   return (
     <header
       className={[
-        'fixed inset-x-0 top-0 z-50 border-b',
-        'transition-[background,border-color,backdrop-filter] duration-[400ms]',
+        'fixed inset-x-0 top-0 z-50 border-b-2 border-accent',
+        'transition-[background,backdrop-filter] duration-[400ms]',
         scrolled
-          ? 'bg-[var(--nav-scrolled-bg)] backdrop-blur-[14px] backdrop-saturate-[140%] border-line-soft'
-          : 'border-transparent',
+          ? 'bg-[var(--nav-scrolled-bg)] backdrop-blur-[14px] backdrop-saturate-[140%]'
+          : '',
       ].join(' ')}
     >
-      <div className='wrap flex items-center justify-between h-[72px]'>
+      <div className='wrap flex items-center justify-between h-[66px]'>
         {/* Brand */}
         <a
           href='#top'
           onClick={e => { e.preventDefault(); scrollToSection('top') }}
-          className='font-mono-face text-[14px] tracking-[0.02em] inline-flex items-center gap-[9px] text-copy'
+          className='font-mono-face text-[13px] font-bold tracking-[0.06em] uppercase inline-flex items-center gap-[7px] text-copy'
         >
-          <span className='size-[7px] rounded-full bg-accent [animation:pulse_2.6s_ease-in-out_infinite]' />
+          <span className='text-accent'>&gt;</span>
           Strahinja&nbsp;Ković
+          <span className='text-accent [animation:blink_1.1s_step-end_infinite]'>
+            _
+          </span>
         </a>
 
         {/* Nav links */}
         <nav
           className={[
-            'font-mono-face text-[13px] tracking-[0.02em]',
-            'min-[881px]:flex min-[881px]:flex-row min-[881px]:items-center min-[881px]:gap-[30px]',
+            'font-mono-face text-[12px] tracking-[0.1em] uppercase',
+            'min-[881px]:flex min-[881px]:flex-row min-[881px]:items-center min-[881px]:gap-[26px]',
             'min-[881px]:static min-[881px]:p-0 min-[881px]:bg-transparent min-[881px]:border-0',
             menuOpen
               ? [
-                  'flex flex-col items-start gap-1',
-                  'absolute top-[72px] inset-x-0',
-                  'px-[clamp(20px,5vw,72px)] pt-[18px] pb-[26px]',
+                  'flex flex-col items-start gap-2',
+                  'absolute top-[66px] inset-x-0',
+                  'px-[clamp(16px,3vw,40px)] pt-[18px] pb-[26px]',
                   'bg-[var(--nav-menu-bg)] backdrop-blur-[14px]',
-                  'border-b border-line-soft',
+                  'border-b-2 border-line-soft',
                 ].join(' ')
               : 'hidden',
           ].join(' ')}
@@ -71,7 +74,7 @@ export default function NavBar() {
           <a
             href='#contact'
             onClick={e => { e.preventDefault(); scrollToSection('contact') }}
-            className='border border-line rounded-full px-[18px] py-[9px] text-copy whitespace-nowrap transition-[border-color,background] duration-[250ms] hover:border-accent hover:bg-accent-soft'
+            className='bg-accent text-accent-ink font-bold px-[14px] py-[9px] whitespace-nowrap transition-opacity duration-[250ms] hover:opacity-85'
           >
             Available for work
           </a>
@@ -79,7 +82,7 @@ export default function NavBar() {
 
         {/* Mobile toggle */}
         <button
-          className='min-[881px]:hidden font-mono-face text-[13px] text-copy bg-transparent border border-line rounded-full px-[14px] py-[8px] cursor-pointer'
+          className='min-[881px]:hidden font-mono-face text-[12px] tracking-[0.1em] uppercase text-copy bg-transparent border-2 border-line px-[13px] py-[7px] cursor-pointer'
           aria-label='Toggle menu'
           onClick={() => setMenuOpen(o => !o)}
         >

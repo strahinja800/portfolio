@@ -1,8 +1,12 @@
 'use client'
 
 import {
-  PROJECT_LINK,
+  PROJECT_FRAME,
   PROJECT_LINK_ARROW,
+  PROJECT_LINK_PRIMARY,
+  PROJECT_LINK_SECONDARY,
+  SECTION_INDEX,
+  SECTION_TITLE,
   STACK_TAG,
 } from '@/constants/work-consts'
 import Image from 'next/image'
@@ -65,17 +69,21 @@ export default function Work() {
 
   return (
     <section
-      className='py-[clamp(60px,10vh,120px)]'
+      className='py-[clamp(56px,9vh,110px)]'
       id='work'
     >
       <div className='wrap'>
         {/* Section head */}
-        <div className='flex items-baseline justify-between gap-6 pb-10 border-b border-line-soft mb-14 reveal'>
-          <h2 className='font-display-face text-[clamp(28px,4vw,44px)] font-semibold tracking-[-0.02em] leading-[1.05]'>
-            Selected work
+        <div className='flex items-end justify-between gap-6 pb-[22px] border-b-2 border-accent reveal'>
+          <h2 className={SECTION_TITLE}>
+            Selected
+            <br />
+            Work
           </h2>
-          <span className='font-mono-face text-[13px] text-faint whitespace-nowrap'>
+          <span className={SECTION_INDEX}>
             [ 01 / Work ]
+            {!loading &&
+              ` — ${String(projects.length).padStart(2, '0')} projects`}
           </span>
         </div>
 
@@ -101,22 +109,31 @@ export default function Work() {
             <article
               key={`project-${p.id}`}
               className={[
-                'group/project grid items-center gap-[clamp(20px,3vw,40px)] py-[clamp(48px,7vw,88px)] max-[880px]:grid-cols-1',
-                i === 0
-                  ? 'grid-cols-[1fr_1.45fr] pt-0 border-t-0'
-                  : 'grid-cols-[1fr_1.45fr] border-t border-line-soft',
+                'group/project grid grid-cols-[128px_1fr_1.05fr] items-start gap-[clamp(20px,2.4vw,30px)] py-[clamp(28px,4vw,34px)]',
+                'max-[880px]:grid-cols-1',
+                i === projects.length - 1 ? '' : 'border-b border-line-soft',
               ].join(' ')}
             >
+              {/* Index numeral */}
+              <span
+                className='font-display-face text-[clamp(48px,7vw,70px)] leading-[0.8] text-transparent [-webkit-text-stroke:2px_var(--line)]'
+                aria-hidden
+              >
+                {String(i + 1).padStart(2, '0')}
+              </span>
+
               {/* Info */}
-              <div>
-                <div className='font-mono-face text-[13px] text-accent mb-[18px]'>
+              <div className='flex flex-col items-start gap-[15px]'>
+                <span className='font-mono-face text-[11.5px] tracking-[0.16em] uppercase text-accent'>
                   {p.subtitle}
-                </div>
-                <h3 className='font-display-face text-[clamp(26px,3.4vw,40px)] font-semibold tracking-[-0.02em] leading-[1.05] mb-4'>
+                </span>
+                <h3 className='font-display-face text-[clamp(26px,3.2vw,34px)] leading-[0.98] tracking-[-0.03em] uppercase'>
                   {p.title}
                 </h3>
-                <p className='text-muted max-w-[46ch] mb-[26px]'>{descText}</p>
-                <div className='flex flex-wrap gap-2 mb-[30px]'>
+                <p className='text-[13.5px] leading-[1.75] text-muted max-w-[44ch]'>
+                  {descText}
+                </p>
+                <div className='flex flex-wrap gap-[7px]'>
                   {techStack.map((t: string) => (
                     <span
                       key={t}
@@ -126,13 +143,13 @@ export default function Work() {
                     </span>
                   ))}
                 </div>
-                <div className='flex flex-wrap items-center gap-x-7 gap-y-3'>
+                <div className='flex flex-wrap items-center gap-x-[22px] gap-y-3 mt-1'>
                   {p.liveUrl && (
                     <Link
                       href={p.liveUrl}
                       target='_blank'
                       rel='noopener noreferrer'
-                      className={PROJECT_LINK}
+                      className={PROJECT_LINK_PRIMARY}
                     >
                       View live <span className={PROJECT_LINK_ARROW}>↗</span>
                     </Link>
@@ -142,10 +159,9 @@ export default function Work() {
                       href={p.sourceUrl}
                       target='_blank'
                       rel='noopener noreferrer'
-                      className={PROJECT_LINK}
+                      className={PROJECT_LINK_SECONDARY}
                     >
-                      View source code{' '}
-                      <span className={PROJECT_LINK_ARROW}>↗</span>
+                      Source <span className={PROJECT_LINK_ARROW}>↗</span>
                     </Link>
                   )}
                 </div>
@@ -154,30 +170,26 @@ export default function Work() {
               {/* Media */}
               <div
                 className={[
-                  'border border-line-soft rounded-[var(--radius)] overflow-hidden bg-surface-2',
+                  PROJECT_FRAME,
+                  'relative aspect-video w-full',
                   'transition-[transform,border-color] duration-500 ease-[cubic-bezier(0.2,0.7,0.2,1)]',
-                  'group-hover/project:-translate-y-1.5 group-hover/project:border-line',
+                  'group-hover/project:-translate-y-1.5 group-hover/project:border-accent',
                   'max-[880px]:mt-2',
                 ].join(' ')}
               >
-                <div
-                  className='ph relative aspect-video [background:repeating-linear-gradient(135deg,oklch(0.245_0.009_264)_0_12px,oklch(0.225_0.009_264)_12px_24px)] overflow-hidden'
-                >
-                  <div className='absolute inset-x-0 top-0 h-[34px] flex items-center gap-[7px] px-3.5 border-b border-line-soft bg-[oklch(0.20_0.008_264/0.7)] z-10'>
-                    <i className='size-[9px] rounded-full bg-line block not-italic' />
-                    <i className='size-[9px] rounded-full bg-line block not-italic' />
-                    <i className='size-[9px] rounded-full bg-line block not-italic' />
-                  </div>
-                  {p.coverImage?.url && (
-                    <Image
-                      src={p.coverImage.url}
-                      alt={p.coverImage.alt || p.title}
-                      fill
-                      className='object-cover object-top pt-8.5'
-                      sizes='(max-width: 880px) 100vw, 50vw'
-                    />
-                  )}
-                </div>
+                {p.coverImage?.url ? (
+                  <Image
+                    src={p.coverImage.url}
+                    alt={p.coverImage.alt || p.title}
+                    fill
+                    className='object-cover object-top'
+                    sizes='(max-width: 880px) 100vw, 50vw'
+                  />
+                ) : (
+                  <span className='absolute inset-0 flex items-center justify-center font-mono-face text-[11.5px] tracking-[0.18em] uppercase text-faint'>
+                    ./{p.title?.toLowerCase().replace(/\s+/g, '-')}.png
+                  </span>
+                )}
               </div>
             </article>
           )

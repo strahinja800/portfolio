@@ -24,19 +24,19 @@ export default function Hero() {
       .catch(() => { setLoading(false) })
   }, [])
   return (
-    <section className='pt-[clamp(100px,16vh,180px)] pb-[clamp(60px,10vh,120px)]'>
+    <section className='pt-[clamp(96px,15vh,168px)] pb-[clamp(48px,8vh,96px)]'>
       <div className='wrap'>
-        {/* Status pill */}
-        <div className='mb-12 reveal'>
-          <span className='inline-flex items-center gap-2.5 font-mono-face text-[12.5px] tracking-[0.04em] text-muted border border-line-soft bg-surface-2 rounded-full px-3.5 py-[7px] whitespace-nowrap max-[480px]:whitespace-normal'>
-            <span className='size-2 rounded-full bg-[oklch(0.78_0.16_150)] shadow-[0_0_10px_oklch(0.78_0.16_150/0.8)]' />
+        {/* Status */}
+        <div className='mb-9 reveal'>
+          <span className='inline-flex items-center gap-3.5 font-mono-face text-[11.5px] tracking-[0.18em] uppercase text-muted'>
+            <span className='size-[9px] bg-accent shadow-[0_0_16px_var(--accent)] shrink-0' />
             Open to full-time roles · Remote / Europe
           </span>
         </div>
 
         {/* Headline */}
         <h1
-          className='font-display-face text-[clamp(40px,8.2vw,104px)] font-bold leading-[0.98] tracking-[-0.035em] mb-10 reveal'
+          className='font-display-face text-[clamp(34px,6.6vw,96px)] leading-[0.84] tracking-[-0.045em] uppercase reveal'
           data-d='1'
         >
           Frontend web
@@ -46,59 +46,73 @@ export default function Hero() {
           <span className='grad'>things that ship.</span>
         </h1>
 
-        {/* Lede */}
-        <p
-          className='text-[clamp(18px,2.3vw,23px)] leading-[1.5] text-muted max-w-[30ch] reveal'
+        {/* ASCII rule */}
+        <div
+          className='font-mono-face text-[13px] text-line-soft overflow-hidden whitespace-nowrap select-none my-[30px] reveal'
+          data-d='2'
+          aria-hidden
+        >
+          ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+        </div>
+
+        {/* Lede + CTAs */}
+        <div
+          className='grid grid-cols-[1.1fr_0.9fr] gap-[clamp(28px,5vw,56px)] items-end max-[880px]:grid-cols-1 max-[880px]:items-start reveal'
           data-d='2'
         >
-          I&apos;m{' '}
-          <strong className='text-copy font-semibold'>Strahinja Ković</strong> —
-          I design and build web products end to end, from data models to the
-          pixels users actually touch.
-        </p>
+          <p className='text-[clamp(14px,1.6vw,15px)] leading-[1.8] text-muted max-w-[50ch]'>
+            <span className='text-accent'>$</span> cat about.txt
+            <br />
+            I&apos;m{' '}
+            <strong className='text-copy font-bold'>Strahinja Ković</strong> — I
+            design and build web products end to end, from data models to the
+            pixels users actually touch.
+          </p>
 
-        {/* CTAs */}
-        <div
-          className='flex text-surface flex-wrap gap-3.5 mt-14 reveal'
-          data-d='3'
-        >
-          <a
-            href='#work'
-            onClick={e => { e.preventDefault(); scrollToSection('work') }}
-            className='group inline-flex items-center gap-2.5 font-mono-face text-[13.5px] tracking-[0.02em] px-5.5 py-3.5 rounded-full bg-copy font-semibold transition-transform duration-250 hover:-translate-y-0.5'
-          >
-            View selected work{' '}
-            <span className='transition-transform duration-250 group-hover:translate-x-0.75 group-hover:-translate-y-0.75'>
-              ↗
-            </span>
-          </a>
-          <a
-            href='#contact'
-            onClick={e => { e.preventDefault(); scrollToSection('contact') }}
-            className='group inline-flex items-center gap-2.5 font-mono-face text-[13.5px] tracking-[0.02em] px-5.5 py-3.5 rounded-full border border-line text-copy transition-[transform,background,border-color] duration-250 hover:border-accent hover:bg-accent-soft hover:-translate-y-0.5'
-          >
-            Get in touch{' '}
-            <span className='transition-transform duration-250 group-hover:translate-x-0.75 group-hover:-translate-y-0.75'>
-              ↗
-            </span>
-          </a>
+          <div className='flex flex-wrap gap-3 min-[881px]:justify-end'>
+            <a
+              href='#work'
+              onClick={e => { e.preventDefault(); scrollToSection('work') }}
+              className='group inline-flex items-center gap-3 font-mono-face text-[12.5px] font-bold tracking-[0.08em] uppercase px-5.5 py-3.5 bg-accent text-accent-ink transition-opacity duration-250 hover:opacity-85'
+            >
+              View work{' '}
+              <span className='transition-transform duration-250 group-hover:translate-x-0.75 group-hover:-translate-y-0.75'>
+                ↗
+              </span>
+            </a>
+            <a
+              href='#contact'
+              onClick={e => { e.preventDefault(); scrollToSection('contact') }}
+              className='group inline-flex items-center gap-3 font-mono-face text-[12.5px] font-bold tracking-[0.08em] uppercase px-5.5 py-3.5 border-2 border-line text-copy transition-colors duration-250 hover:border-accent hover:text-accent'
+            >
+              Get in touch{' '}
+              <span className='transition-transform duration-250 group-hover:translate-x-0.75 group-hover:-translate-y-0.75'>
+                ↗
+              </span>
+            </a>
+          </div>
         </div>
 
         {/* Meta strip */}
         <div
-          className='mt-24 pt-7 border-t border-line-soft reveal'
+          className='mt-11 reveal'
           data-d='3'
         >
           {loading ? (
             <HeroSkeleton />
           ) : (
-            <div className='flex flex-wrap gap-[clamp(28px,5vw,64px)]'>
+            <div className='grid grid-cols-4 gap-0.5 bg-line-soft border-2 border-line-soft max-[880px]:grid-cols-2'>
               {metaStrip.map(({ k, v }: MetaItem) => (
-                <div key={k} className='flex flex-col gap-1.25'>
-                  <span className='font-mono-face text-[11.5px] tracking-[0.14em] uppercase text-faint'>
+                <div
+                  key={k}
+                  className='flex flex-col gap-2 bg-surface px-5 py-4.5'
+                >
+                  <span className='font-mono-face text-[10.5px] tracking-[0.18em] uppercase text-faint'>
                     {k}
                   </span>
-                  <span className='text-[15px] text-copy'>{v}</span>
+                  <span className='font-mono-face text-[15px] font-medium text-copy'>
+                    {v}
+                  </span>
                 </div>
               ))}
             </div>

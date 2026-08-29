@@ -100,7 +100,7 @@ export function ThemeToggle() {
       aria-label={
         theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
       }
-      className='text-muted hover:text-copy transition-colors duration-[250ms] cursor-pointer w-[36px] h-[36px] flex items-center justify-center rounded-full border border-line-soft hover:border-line'
+      className='text-muted hover:text-accent transition-colors duration-250 cursor-pointer size-8.5 flex items-center justify-center border-2 border-line hover:border-accent'
     >
       {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
     </button>
