@@ -38,7 +38,7 @@ export default function About() {
     >
       <div className='wrap'>
         {/* Section head */}
-        <div className='flex items-end justify-between gap-6 pb-[22px] border-b-2 border-accent mb-10 reveal'>
+        <div className='flex flex-wrap items-end justify-between gap-x-6 gap-y-2 pb-[22px] border-b-2 border-accent mb-10 reveal'>
           <h2 className={SECTION_TITLE}>About</h2>
           <span className={SECTION_INDEX}>[ 02 / About ]</span>
         </div>
