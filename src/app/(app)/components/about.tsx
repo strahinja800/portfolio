@@ -40,7 +40,7 @@ export default function About() {
         {/* Section head */}
         <div className='flex flex-wrap items-end justify-between gap-x-6 gap-y-2 pb-[22px] border-b-2 border-accent mb-10 reveal'>
           <h2 className={SECTION_TITLE}>About</h2>
-          <span className={SECTION_INDEX}>[ 02 / About ]</span>
+          <span className={SECTION_INDEX}>[ 03 / About ]</span>
         </div>
 
         <div className='grid grid-cols-[1.15fr_0.85fr] gap-[clamp(36px,5vw,64px)] items-start max-[880px]:grid-cols-1'>

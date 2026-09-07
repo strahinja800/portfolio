@@ -6,6 +6,7 @@ import Footer from './components/shared/footer'
 import Marquee from './components/shared/marquee'
 import Hero from './components/hero'
 import Work from './components/work'
+import Experience from './components/experience'
 import About from './components/about'
 import Contact from './components/contact'
 
@@ -59,6 +60,7 @@ export default function Home() {
         <Hero />
         <Marquee />
         <Work />
+        <Experience />
         <About />
         <Contact />
       </main>
