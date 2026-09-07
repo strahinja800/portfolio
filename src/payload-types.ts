@@ -72,6 +72,7 @@ export interface Config {
     projects: Project;
     skills: Skill;
     meta: Meta;
+    experience: Experience;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     skills: SkillsSelect<false> | SkillsSelect<true>;
     meta: MetaSelect<false> | MetaSelect<true>;
+    experience: ExperienceSelect<false> | ExperienceSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -232,6 +234,19 @@ export interface Meta {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experience".
+ */
+export interface Experience {
+  id: string;
+  role: string;
+  period: string;
+  description: string;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -273,6 +288,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'meta';
         value: string | Meta;
+      } | null)
+    | ({
+        relationTo: 'experience';
+        value: string | Experience;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -399,6 +418,18 @@ export interface SkillsSelect<T extends boolean = true> {
 export interface MetaSelect<T extends boolean = true> {
   key?: T;
   value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experience_select".
+ */
+export interface ExperienceSelect<T extends boolean = true> {
+  role?: T;
+  period?: T;
+  description?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }
