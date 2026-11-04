@@ -73,6 +73,7 @@ export interface Config {
     skills: Skill;
     meta: Meta;
     experience: Experience;
+    inquiries: Inquiry;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     skills: SkillsSelect<false> | SkillsSelect<true>;
     meta: MetaSelect<false> | MetaSelect<true>;
     experience: ExperienceSelect<false> | ExperienceSelect<true>;
+    inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -247,6 +249,22 @@ export interface Experience {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inquiries".
+ */
+export interface Inquiry {
+  id: string;
+  name: string;
+  email: string;
+  company?: string | null;
+  service?:
+    | ('Business Website' | 'Landing Page' | 'Website Redesign' | 'CMS Integration' | 'Website Maintenance' | 'Other')
+    | null;
+  details: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -292,6 +310,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'experience';
         value: string | Experience;
+      } | null)
+    | ({
+        relationTo: 'inquiries';
+        value: string | Inquiry;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -430,6 +452,19 @@ export interface ExperienceSelect<T extends boolean = true> {
   period?: T;
   description?: T;
   order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inquiries_select".
+ */
+export interface InquiriesSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  company?: T;
+  service?: T;
+  details?: T;
   updatedAt?: T;
   createdAt?: T;
 }
