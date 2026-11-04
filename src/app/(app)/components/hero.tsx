@@ -1,8 +1,8 @@
 'use client'
 
-import { scrollToSection } from '@/hooks/use-smooth-scroll'
 import { useEffect, useState } from 'react'
 import HeroSkeleton from './hero-skeleton'
+import SectionLink from './shared/section-link'
 
 type MetaItem = { k: string; v: string }
 
@@ -70,26 +70,24 @@ export default function Hero() {
           </p>
 
           <div className='flex flex-wrap gap-3 min-[881px]:justify-end'>
-            <a
-              href='#work'
-              onClick={e => { e.preventDefault(); scrollToSection('work') }}
+            <SectionLink
+              id='work'
               className='group inline-flex items-center gap-3 font-mono-face text-[12.5px] font-bold tracking-[0.08em] uppercase px-5.5 py-3.5 bg-accent text-accent-ink transition-opacity duration-250 hover:opacity-85'
             >
               View work{' '}
               <span className='transition-transform duration-250 group-hover:translate-x-0.75 group-hover:-translate-y-0.75'>
                 ↗
               </span>
-            </a>
-            <a
-              href='#contact'
-              onClick={e => { e.preventDefault(); scrollToSection('contact') }}
+            </SectionLink>
+            <SectionLink
+              id='contact'
               className='group inline-flex items-center gap-3 font-mono-face text-[12.5px] font-bold tracking-[0.08em] uppercase px-5.5 py-3.5 border-2 border-line text-copy transition-colors duration-250 hover:border-accent hover:text-accent'
             >
               Get in touch{' '}
               <span className='transition-transform duration-250 group-hover:translate-x-0.75 group-hover:-translate-y-0.75'>
                 ↗
               </span>
-            </a>
+            </SectionLink>
           </div>
         </div>
 

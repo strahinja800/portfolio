@@ -1,7 +1,8 @@
 'use client'
 
 import { LINK_CLASS, useNavBarLinks } from '@/hooks/nav-bar-links'
-import { scrollToSection } from '@/hooks/use-smooth-scroll'
+import Link from 'next/link'
+import SectionLink from './section-link'
 import { ThemeToggle } from './theme-toggle'
 
 export default function NavBar() {
@@ -19,9 +20,8 @@ export default function NavBar() {
     >
       <div className='wrap flex items-center justify-between h-[66px]'>
         {/* Brand */}
-        <a
-          href='#top'
-          onClick={e => { e.preventDefault(); scrollToSection('top') }}
+        <SectionLink
+          id='top'
           className='font-mono-face text-[13px] font-bold tracking-[0.06em] uppercase inline-flex items-center gap-[7px] text-copy'
         >
           <span className='text-accent'>&gt;</span>
@@ -29,7 +29,7 @@ export default function NavBar() {
           <span className='text-accent [animation:blink_1.1s_step-end_infinite]'>
             _
           </span>
-        </a>
+        </SectionLink>
 
         {/* Nav links */}
         <nav
@@ -49,35 +49,37 @@ export default function NavBar() {
           ].join(' ')}
           onClick={() => setMenuOpen(false)}
         >
-          <a
-            href='#work'
-            onClick={e => { e.preventDefault(); scrollToSection('work') }}
+          <SectionLink
+            id='work'
             className={LINK_CLASS('work', activeSection)}
           >
             <span className='text-faint mr-1.5'>01</span>Work
-          </a>
-          <a
-            href='#about'
-            onClick={e => { e.preventDefault(); scrollToSection('about') }}
+          </SectionLink>
+          <SectionLink
+            id='about'
             className={LINK_CLASS('about', activeSection)}
           >
             <span className='text-faint mr-1.5'>02</span>About
-          </a>
-          <a
-            href='#contact'
-            onClick={e => { e.preventDefault(); scrollToSection('contact') }}
+          </SectionLink>
+          <SectionLink
+            id='contact'
             className={LINK_CLASS('contact', activeSection)}
           >
             <span className='text-faint mr-1.5'>03</span>Contact
-          </a>
+          </SectionLink>
+          <Link
+            href='/web-development'
+            className={LINK_CLASS('web-development', activeSection)}
+          >
+            <span className='text-faint mr-1.5'>04</span>Services
+          </Link>
           <ThemeToggle />
-          <a
-            href='#contact'
-            onClick={e => { e.preventDefault(); scrollToSection('contact') }}
+          <SectionLink
+            id='contact'
             className='bg-accent text-accent-ink font-bold px-[14px] py-[9px] whitespace-nowrap transition-opacity duration-[250ms] hover:opacity-85'
           >
             Available for work
-          </a>
+          </SectionLink>
         </nav>
 
         {/* Mobile toggle */}

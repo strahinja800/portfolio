@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from 'react'
 
-export function useNavBarLinks() {
+const HOME_SECTIONS = ['work', 'about', 'contact']
+
+export function useNavBarLinks(sections: readonly string[] = HOME_SECTIONS) {
   const [activeSection, setActiveSection] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -12,7 +14,7 @@ export function useNavBarLinks() {
       setScrolled(window.scrollY > 24)
       const pos = window.scrollY + window.innerHeight * 0.35
       let current: string | null = null
-      ;['work', 'about', 'contact'].forEach(id => {
+      sections.forEach(id => {
         const el = document.getElementById(id)
         if (el && el.offsetTop <= pos) current = id
       })
@@ -21,7 +23,7 @@ export function useNavBarLinks() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [sections])
 
   return { activeSection, scrolled, menuOpen, setMenuOpen }
 }
