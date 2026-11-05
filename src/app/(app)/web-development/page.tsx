@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import Footer from '../components/shared/footer'
+import NavBar from '../components/shared/nav-bar'
 import WebDevelopmentContact from '../components/web-development/web-development-contact'
 import WebDevelopmentFaq from '../components/web-development/web-development-faq'
 import WebDevelopmentHero from '../components/web-development/web-development-hero'
-import WebDevelopmentNavBar from '../components/web-development/web-development-nav-bar'
 import WebDevelopmentProcess from '../components/web-development/web-development-process'
 import WebDevelopmentScrollReveal from '../components/web-development/web-development-scroll-reveal'
 import WebDevelopmentServices from '../components/web-development/web-development-services'
 import WebDevelopmentWhy from '../components/web-development/web-development-why'
+import { WEB_DEVELOPMENT_NAV } from '@/constants/nav-links'
 import { SERVICES } from '@/constants/web-development-consts'
 
 const TITLE = 'Freelance Web Developer | Business Website Design & Development'
@@ -68,7 +69,7 @@ export default function WebDevelopmentPage() {
         }}
       />
       <WebDevelopmentScrollReveal />
-      <WebDevelopmentNavBar />
+      <NavBar nav={WEB_DEVELOPMENT_NAV} />
 
       <main id='top'>
         <WebDevelopmentHero />

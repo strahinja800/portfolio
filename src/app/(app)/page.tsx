@@ -1,5 +1,6 @@
 'use client'
 
+import { HOME_NAV } from '@/constants/nav-links'
 import { useScrollReveal } from '@/hooks/use-scroll-reveal'
 import NavBar from './components/shared/nav-bar'
 import Footer from './components/shared/footer'
@@ -15,7 +16,7 @@ export default function Home() {
 
   return (
     <>
-      <NavBar />
+      <NavBar nav={HOME_NAV} />
 
       <main id='top'>
         <Hero />

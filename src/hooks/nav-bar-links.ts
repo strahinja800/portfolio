@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-const HOME_SECTIONS = ['work', 'about', 'contact']
-
-export function useNavBarLinks(sections: readonly string[] = HOME_SECTIONS) {
+export function useNavBarLinks(sections: readonly string[]) {
   const [activeSection, setActiveSection] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)

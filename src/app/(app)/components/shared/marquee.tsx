@@ -15,15 +15,16 @@ export default function Marquee() {
 
   return (
     <div
-      className='w-[104%] -ml-[2%] bg-accent text-accent-ink overflow-hidden rotate-[-0.8deg] py-2.5 select-none'
+      className='relative z-1 border-y border-line bg-surface text-copy overflow-hidden py-3 select-none'
       aria-hidden
     >
       <div className='flex w-max [animation:marquee_38s_linear_infinite]'>
         {strip.map((item, i) => (
           <span
             key={`${item}-${i}`}
-            className='font-mono-face text-[12.5px] font-bold tracking-[0.24em] uppercase px-6 whitespace-nowrap'
+            className='flex items-center gap-12 pl-12 font-mono-face text-[12.5px] font-medium tracking-[0.2em] uppercase whitespace-nowrap'
           >
+            <span className='text-accent'>+</span>
             {item}
           </span>
         ))}

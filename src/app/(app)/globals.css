@@ -2,57 +2,55 @@
 
 /* ── CSS variables ──────────────────────────────────────────── */
 :root {
-  /* dark theme (default) — phosphor terminal */
-  --bg: oklch(0.155 0.012 158);
-  --bg-2: oklch(0.195 0.016 158);
-  --bg-3: oklch(0.235 0.02 158);
-  --line: oklch(0.32 0.03 158);
-  --line-soft: oklch(0.26 0.024 158);
-  --text: oklch(0.97 0.02 158);
-  --muted: oklch(0.72 0.028 158);
-  --faint: oklch(0.48 0.03 158);
-  --accent-h: 152;
-  --accent: oklch(0.86 0.2 var(--accent-h));
-  --accent-2: oklch(0.9 0.16 calc(var(--accent-h) + 16));
-  --accent-soft: oklch(0.86 0.2 var(--accent-h) / 0.14);
-  --accent-ink: oklch(0.155 0.012 158);
-  --accent-grad: linear-gradient(105deg, var(--accent-2), var(--accent));
-  --accent-glow: oklch(0.86 0.2 var(--accent-h) / 0.3);
-  --nav-scrolled-bg: oklch(0.155 0.012 158 / 0.82);
-  --nav-menu-bg: oklch(0.155 0.012 158 / 0.97);
-  --skeleton-from: oklch(0.195 0.016 158);
-  --skeleton-to: oklch(0.26 0.024 158);
-  --scanline: oklch(0.86 0.2 152 / 0.035);
+  /* dark theme (default) — graphite draft */
+  --bg: #141518;
+  --bg-2: #1a1b1f;
+  --bg-3: #222429;
+  --line: #3f424a;
+  --line-soft: #2c2e34;
+  --text: #ecedef;
+  --muted: #a9adb5;
+  --faint: #868b94;
+  --accent: #9db8d6;
+  --accent-2: #b7c9dc;
+  --accent-soft: rgb(157 184 214 / 0.14);
+  --accent-ink: #141518;
+  --grid-major: #24262b;
+  --grid-minor: #1a1b1f;
+  --nav-scrolled-bg: rgb(20 21 24 / 0.85);
+  --nav-menu-bg: rgb(20 21 24 / 0.97);
+  --skeleton-from: #1a1b1f;
+  --skeleton-to: #2c2e34;
   --font-display: var(--font-archivo), 'Arial Black', system-ui, sans-serif;
-  --font-body: var(--font-jetbrains), ui-monospace, monospace;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-body: var(--font-archivo), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
   --maxw: 1320px;
   --gutter: clamp(16px, 3vw, 40px);
   --radius: 0px;
   color-scheme: dark;
 }
 
-/* ── Light theme overrides — paper terminal ─────────────────── */
+/* ── Light theme overrides — studio gray ────────────────────── */
 html[data-theme='light'] {
   color-scheme: light;
-  --bg: oklch(0.97 0.008 150);
-  --bg-2: oklch(0.935 0.012 150);
-  --bg-3: oklch(0.89 0.014 150);
-  --line: oklch(0.3 0.02 155);
-  --line-soft: oklch(0.82 0.018 150);
-  --text: oklch(0.18 0.02 155);
-  --muted: oklch(0.42 0.022 155);
-  --faint: oklch(0.6 0.02 155);
-  --accent: oklch(0.52 0.14 var(--accent-h));
-  --accent-2: oklch(0.48 0.12 calc(var(--accent-h) + 16));
-  --accent-soft: oklch(0.52 0.14 var(--accent-h) / 0.12);
-  --accent-ink: oklch(0.97 0.008 150);
-  --accent-glow: transparent;
-  --nav-scrolled-bg: oklch(0.97 0.008 150 / 0.88);
-  --nav-menu-bg: oklch(0.97 0.008 150 / 0.98);
-  --skeleton-from: oklch(0.89 0.014 150);
-  --skeleton-to: oklch(0.84 0.016 150);
-  --scanline: transparent;
+  --bg: #dcdcdf;
+  --bg-2: #d3d4d7;
+  --bg-3: #c9cace;
+  --line: #a3a5ac;
+  --line-soft: #c3c4c9;
+  --text: #121316;
+  --muted: #3e4148;
+  --faint: #555960;
+  --accent: #2b4e8c;
+  --accent-2: #1f3a6b;
+  --accent-soft: rgb(43 78 140 / 0.12);
+  --accent-ink: #ffffff;
+  --grid-major: #c9cace;
+  --grid-minor: #d3d4d7;
+  --nav-scrolled-bg: rgb(220 220 223 / 0.88);
+  --nav-menu-bg: rgb(220 220 223 / 0.98);
+  --skeleton-from: #c9cace;
+  --skeleton-to: #bdbec3;
 }
 
 /* ── Tailwind theme tokens ──────────────────────────────────── */
@@ -71,8 +69,8 @@ html[data-theme='light'] {
   --color-accent-2: var(--accent-2);
   --color-accent-soft: var(--accent-soft);
   --color-accent-ink: var(--accent-ink);
-  --font-display-face: var(--font-archivo), 'Arial Black', system-ui, sans-serif;
-  --font-mono-face: var(--font-jetbrains), ui-monospace, monospace;
+  --font-display-face: var(--font-display);
+  --font-mono-face: var(--font-mono);
 }
 
 /* ── Base reset — inside @layer base so Tailwind utilities win ── */
@@ -119,52 +117,30 @@ html[data-theme='light'] {
     position: relative;
     z-index: 1;
   }
+  /* wide, heavy cut of Archivo for every display heading */
+  .font-display-face {
+    font-weight: 900;
+    font-stretch: 122%;
+  }
 }
 
-/* ambient glow — fixed pseudo-element can't be done in Tailwind */
+/* drafting grid — fixed pseudo-element can't be done in Tailwind */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background:
-    radial-gradient(
-      880px 520px at 82% -8%,
-      oklch(0.86 0.2 var(--accent-h) / 0.09),
-      transparent 62%
-    ),
-    radial-gradient(
-      680px 420px at 6% 4%,
-      oklch(0.86 0.2 var(--accent-h) / 0.05),
-      transparent 58%
-    );
-}
-
-/* CRT scanlines — the phosphor tell */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 40;
-  background: repeating-linear-gradient(
-    180deg,
-    var(--scanline) 0 1px,
-    transparent 1px 4px
-  );
-}
-
-/* nav cursor blink */
-@keyframes blink {
-  0%,
-  48% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0;
-  }
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+  background-size:
+    160px 160px,
+    160px 160px,
+    20px 20px,
+    20px 20px;
 }
 
 /* stack marquee */
@@ -179,10 +155,14 @@ body::after {
 
 /* ── Shared layout & gradient utilities ─────────────────────── */
 
-/* headline treatment — solid phosphor with CRT bloom */
+/* headline treatment — outlined on graphite, solid on studio gray */
 .grad {
+  color: transparent;
+  -webkit-text-stroke: clamp(1px, 0.14vw, 2px) var(--accent);
+}
+html[data-theme='light'] .grad {
   color: var(--accent);
-  text-shadow: 0 0 44px var(--accent-glow);
+  -webkit-text-stroke: 0;
 }
 
 /* centered max-width wrapper — @utility loses margin-inline:auto */

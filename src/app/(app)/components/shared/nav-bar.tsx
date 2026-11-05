@@ -1,40 +1,67 @@
 'use client'
 
+import type { NavConfig } from '@/constants/nav-links'
 import { LINK_CLASS, useNavBarLinks } from '@/hooks/nav-bar-links'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useMemo } from 'react'
 import SectionLink from './section-link'
 import { ThemeToggle } from './theme-toggle'
 
-export default function NavBar() {
-  const { activeSection, scrolled, menuOpen, setMenuOpen } = useNavBarLinks()
+const BRAND_CLASS =
+  'font-display-face text-[17px] tracking-[0.02em] uppercase text-copy'
+
+const CTA_CLASS =
+  'bg-accent text-accent-ink font-bold px-[14px] py-[9px] whitespace-nowrap transition-opacity duration-[250ms] hover:opacity-85'
+
+export default function NavBar({ nav }: { nav: NavConfig }) {
+  const sections = useMemo(
+    () => [
+      ...new Set([
+        ...nav.links.flatMap(link => ('id' in link ? [link.id] : [])),
+        nav.cta.id,
+      ]),
+    ],
+    [nav],
+  )
+  const { activeSection, scrolled, menuOpen, setMenuOpen } =
+    useNavBarLinks(sections)
+  const onHome = usePathname() === '/'
 
   return (
     <header
       className={[
-        'fixed inset-x-0 top-0 z-50 border-b-2 border-accent',
+        'fixed inset-x-0 top-0 z-50 border-b border-line',
         'transition-[background,backdrop-filter] duration-[400ms]',
-        scrolled
+        scrolled || menuOpen
           ? 'bg-[var(--nav-scrolled-bg)] backdrop-blur-[14px] backdrop-saturate-[140%]'
           : '',
       ].join(' ')}
     >
-      <div className='wrap flex items-center justify-between h-[66px]'>
-        {/* Brand */}
-        <SectionLink
-          id='top'
-          className='font-mono-face text-[13px] font-bold tracking-[0.06em] uppercase inline-flex items-center gap-[7px] text-copy'
-        >
-          <span className='text-accent'>&gt;</span>
-          Strahinja&nbsp;Ković
-          <span className='text-accent [animation:blink_1.1s_step-end_infinite]'>
-            _
-          </span>
-        </SectionLink>
+      <div className='wrap flex items-center justify-between gap-3 h-[66px]'>
+        {/* Brand — scrolls to top on home, links back to it elsewhere */}
+        {onHome ? (
+          <SectionLink
+            id='top'
+            className={BRAND_CLASS}
+          >
+            Strahinja<span className='text-accent'>.</span>
+          </SectionLink>
+        ) : (
+          <Link
+            href='/'
+            className={BRAND_CLASS}
+          >
+            Strahinja<span className='text-accent'>.</span>
+          </Link>
+        )}
 
         {/* Nav links */}
         <nav
+          id='site-menu'
+          aria-label='Main'
           className={[
-            'font-mono-face text-[12px] tracking-[0.1em] uppercase',
+            'text-[13px] font-medium tracking-[0.08em] uppercase',
             'min-[881px]:flex min-[881px]:flex-row min-[881px]:items-center min-[881px]:gap-[26px]',
             'min-[881px]:static min-[881px]:p-0 min-[881px]:bg-transparent min-[881px]:border-0',
             menuOpen
@@ -49,47 +76,60 @@ export default function NavBar() {
           ].join(' ')}
           onClick={() => setMenuOpen(false)}
         >
-          <SectionLink
-            id='work'
-            className={LINK_CLASS('work', activeSection)}
-          >
-            <span className='text-faint mr-1.5'>01</span>Work
-          </SectionLink>
-          <SectionLink
-            id='about'
-            className={LINK_CLASS('about', activeSection)}
-          >
-            <span className='text-faint mr-1.5'>02</span>About
-          </SectionLink>
-          <SectionLink
-            id='contact'
-            className={LINK_CLASS('contact', activeSection)}
-          >
-            <span className='text-faint mr-1.5'>03</span>Contact
-          </SectionLink>
-          <Link
-            href='/web-development'
-            className={LINK_CLASS('web-development', activeSection)}
-          >
-            <span className='text-faint mr-1.5'>04</span>Services
-          </Link>
+          {nav.links.map((link, i) => {
+            const num = (
+              <span className='text-faint mr-1.5'>
+                {String(i + 1).padStart(2, '0')}
+              </span>
+            )
+            return 'id' in link ? (
+              <SectionLink
+                key={link.label}
+                id={link.id}
+                className={LINK_CLASS(link.id, activeSection)}
+              >
+                {num}
+                {link.label}
+              </SectionLink>
+            ) : (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={LINK_CLASS(link.href, activeSection)}
+              >
+                {num}
+                {link.label}
+              </Link>
+            )
+          })}
           <ThemeToggle />
           <SectionLink
-            id='contact'
-            className='bg-accent text-accent-ink font-bold px-[14px] py-[9px] whitespace-nowrap transition-opacity duration-[250ms] hover:opacity-85'
+            id={nav.cta.id}
+            className={`max-[880px]:hidden ${CTA_CLASS}`}
           >
-            Available for work
+            {nav.cta.label}
           </SectionLink>
         </nav>
 
-        {/* Mobile toggle */}
-        <button
-          className='min-[881px]:hidden font-mono-face text-[12px] tracking-[0.1em] uppercase text-copy bg-transparent border-2 border-line px-[13px] py-[7px] cursor-pointer'
-          aria-label='Toggle menu'
-          onClick={() => setMenuOpen(o => !o)}
-        >
-          Menu
-        </button>
+        {/* Mobile — CTA stays visible next to the menu toggle */}
+        <div className='min-[881px]:hidden flex items-center gap-2'>
+          <SectionLink
+            id={nav.cta.id}
+            className={`text-[13px] tracking-[0.08em] uppercase ${CTA_CLASS}`}
+          >
+            {nav.cta.mobileLabel}
+          </SectionLink>
+          <button
+            type='button'
+            className='text-[13px] font-medium tracking-[0.08em] uppercase text-copy bg-transparent border border-line px-[13px] py-[7px] cursor-pointer'
+            aria-label='Toggle menu'
+            aria-expanded={menuOpen}
+            aria-controls='site-menu'
+            onClick={() => setMenuOpen(o => !o)}
+          >
+            Menu
+          </button>
+        </div>
       </div>
     </header>
   )
