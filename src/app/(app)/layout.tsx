@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from 'next'
-import { Archivo_Black, JetBrains_Mono } from 'next/font/google'
+import { Archivo, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
 
-const archivo = Archivo_Black({
-  subsets: ['latin'],
+const archivo = Archivo({
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-archivo',
-  weight: ['400'],
+  axes: ['wdth'],
 })
 
-const jetbrains = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains',
-  weight: ['400', '500', '700'],
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-plex-mono',
+  weight: ['400', '500'],
 })
 
 export const viewport: Viewport = {
@@ -70,7 +70,7 @@ export default function RootLayout({
   return (
     <html
       lang='en'
-      className={`${archivo.variable} ${jetbrains.variable}`}
+      className={`${archivo.variable} ${plexMono.variable}`}
       suppressHydrationWarning
     >
       <body>
